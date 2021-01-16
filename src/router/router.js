@@ -3,8 +3,8 @@ import Router from 'vue-router'
 
 Vue.use(Router);
 
-import vCatalog from '../components/v-catalog'
-import vCart from '../components/v-cart'
+import vCatalog from '../components/catalog/v-catalog'
+import vCart from '../components/cart/v-cart'
 
 let router = new Router({
     routes: [
