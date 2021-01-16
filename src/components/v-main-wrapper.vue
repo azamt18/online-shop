@@ -1,37 +1,31 @@
 <template>
-  <div class="v-main-wrapper">
-    <v-catalog />
-    <v-cart />
-  </div>
+    <div class="v-main-wrapper">
+        <keep-alive>
+            <router-view></router-view>
+        </keep-alive>
+    </div>
 </template>
 
 <script>
-  import vCatalog from './v-catalog'
-  import vCart from './v-cart'
-
-  export default {
-    name: 'v-main-wrapper',
-    components: {
-      vCatalog,
-      vCart
-    },
-    data() {
-      return {
-        title: 'Main wrapper'
-      }
-    },
-    computed: { },
-    methods: { },
-    watch: { },
-    mounted() {
-      console.log('Hello from console to Main wrapper')
+    export default {
+        name: 'v-main-wrapper',
+        components: {
+        },
+        data() {
+            return {
+                title: 'Main wrapper'
+            }
+        },
+        computed: {},
+        methods: {},
+        watch: {},
+        mounted() {}
     }
-  }
 </script>
 
 <style scoped>
-  .v-main-wrapper {
-    max-width: 900px;
-    margin: 0 auto;
-  }
+    .v-main-wrapper {
+        max-width: 900px;
+        margin: 0 auto;
+    }
 </style>
