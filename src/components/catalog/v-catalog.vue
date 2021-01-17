@@ -4,11 +4,35 @@
             <div class="v-catalog__link_to_cart">Cart: {{CART.length}}</div>
         </router-link>
         <h1>Catalog</h1>
-        <v-select
-                :selected="selected"
-                :categories="categories"
-                @selectOption="sortByCategories"
-        />
+        <div class="filters">
+            <v-select
+                    :selected="selected"
+                    :categories="categories"
+                    @selectOption="sortByCategories"
+            />
+            <div class="range-slider">
+                <input
+                        max="1000"
+                        min="0"
+                        step="10"
+                        type="range"
+                        v-model.number="minPrice"
+                        @change="setRangeSlider"
+                >
+                <input
+                        max="1000"
+                        min="0"
+                        step="10"
+                        type="range"
+                        v-model.number="maxPrice"
+                        @change="setRangeSlider"
+                >
+            </div>
+            <div class="range-values">
+                <p>Min: {{minPrice}}</p>
+                <p>Max: {{maxPrice}}</p>
+            </div>
+        </div>
         <p>Selected: {{selected}}</p>
         <div class="v-catalog__list">
             <v-catalog-item
@@ -41,7 +65,9 @@
                     {name: 'Business', value: 'b'}
                 ],
                 selected: 'All',
-                sortedProducts: []
+                sortedProducts: [],
+                minPrice: 0,
+                maxPrice: 1000
             }
         },
         computed: {
@@ -69,21 +95,33 @@
                 this.selected = option.name;
             },
             sortByCategories(category) {
-                this.sortedProducts = [];
-                let self = this;
-                this.PRODUCTS.map(function (item) {
-                    if (item.category === category.name) {
-                        self.sortedProducts.push(item);
-                    }
+                let vm = this;
+                this.sortedProducts = [...this.PRODUCTS];
+                this.sortedProducts = this.sortedProducts.filter(function (item) {
+                    return item.price >= vm.minPrice && item.price <= vm.maxPrice;
                 });
-                this.selected = category.name;
+                if (category) {
+                    this.sortedProducts = this.sortedProducts.filter(function (item) {
+                        vm.selected = category.name;
+                        return item.category === category.name;
+                    })
+                }
+            },
+            setRangeSlider() {
+                if (this.minPrice > this.maxPrice) {
+                    let temp = this.maxPrice;
+                    this.maxPrice = this.minPrice;
+                    this.minPrice = temp;
+                }
+                this.sortByCategories();
             }
         },
         mounted() {
             this.GET_PRODUCTS_FROM_API()
                 .then((response) => {
                     if (response.data) {
-                        console.log('Data arrived')
+                        console.log('Data arrived');
+                        this.sortByCategories();
                     }
                 })
         }
@@ -110,5 +148,31 @@
             padding: $padding*2;
             border: solid 1px black;
         }
+    }
+
+    .filters {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .range-slider {
+        width: 200px;
+        margin: auto 16px;
+        text-align: center;
+        position: relative;
+    }
+
+    .range-slider svg, .range-slider input[type=range] {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+    }
+
+    input[type=range]::-webkit-slider-thumb {
+        z-index: 2;
+        position: relative;
+        top: 2px;
+        margin-top: -7px;
     }
 </style>

@@ -3,7 +3,7 @@
     {
       "image": "book_1.jpg",
       "name": "Book 1",
-      "price": 100,
+      "price": 1000,
       "article": "B1",
       "available": true,
       "category": "Computer & Technology"
@@ -11,7 +11,7 @@
     {
       "image": "book_2.jpg",
       "name": "Book 2",
-      "price": 200,
+      "price": 500,
       "article": "B2",
       "available": true,
       "category": "Computer & Technology"
@@ -27,7 +27,7 @@
     {
       "image": "book_4.jpg",
       "name": "Book 4",
-      "price": 450,
+      "price": 800,
       "article": "B4",
       "available": true,
       "category": "Business"
@@ -35,7 +35,7 @@
     {
       "image": "book_2.jpg",
       "name": "Book 5",
-      "price": 550,
+      "price": 600,
       "article": "B5",
       "available": false,
       "category": "Computer & Technology"
@@ -43,7 +43,7 @@
     {
       "image": "book_3.jpg",
       "name": "Book 6",
-      "price": 600,
+      "price": 100,
       "article": "B6",
       "available": true,
       "category": "Business"
