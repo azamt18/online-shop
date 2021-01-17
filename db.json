@@ -1,52 +1,52 @@
 {
   "products": [
     {
-      "image": "1.jpg",
-      "name": "T-shirt 1",
+      "image": "book_1.jpg",
+      "name": "Book 1",
       "price": 100,
-      "article": "T1",
+      "article": "B1",
       "available": true,
-      "category": "Мужские"
+      "category": "Computer & Technology"
     },
     {
-      "image": "2.jpg",
-      "name": "T-shirt 2",
+      "image": "book_2.jpg",
+      "name": "Book 2",
       "price": 200,
-      "article": "T2",
+      "article": "B2",
       "available": true,
-      "category": "Женские"
+      "category": "Computer & Technology"
     },
     {
-      "image": "3.jpg",
-      "name": "T-shirt 3",
+      "image": "book_3.jpg",
+      "name": "Book 3",
       "price": 300,
-      "article": "T3",
+      "article": "B3",
       "available": false,
-      "category": "Женские"
+      "category": "Business"
     },
     {
-      "image": "4.jpg",
-      "name": "T-shirt 4",
+      "image": "book_4.jpg",
+      "name": "Book 4",
       "price": 450,
-      "article": "T4",
+      "article": "B4",
       "available": true,
-      "category": "Мужские"
+      "category": "Business"
     },
     {
-      "image": "5.jpg",
-      "name": "T-shirt 5",
+      "image": "book_2.jpg",
+      "name": "Book 5",
       "price": 550,
-      "article": "T5",
+      "article": "B5",
       "available": false,
-      "category": "Женские"
+      "category": "Computer & Technology"
     },
     {
-      "image": "6.jpg",
-      "name": "T-shirt 6",
+      "image": "book_3.jpg",
+      "name": "Book 6",
       "price": 600,
-      "article": "T6",
+      "article": "B6",
       "available": true,
-      "category": "Женские"
+      "category": "Business"
     }
   ]
 }
