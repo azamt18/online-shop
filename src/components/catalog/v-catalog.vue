@@ -3,16 +3,16 @@
         <router-link :to="{name: 'cart', params: {cart_data: CART}}">
             <div class="v-catalog__link_to_cart">Cart: {{CART.length}}</div>
         </router-link>
+        <h1>Catalog</h1>
         <v-select
-                :options="options"
-                @selectOption="selectOption"
                 :selected="selected"
+                :categories="categories"
+                @selectOption="sortByCategories"
         />
         <p>Selected: {{selected}}</p>
-        <h1>Catalog</h1>
         <div class="v-catalog__list">
             <v-catalog-item
-                    v-for="product in PRODUCTS"
+                    v-for="product in filteredProducts"
                     :key="product.article"
                     :product_data="product"
                     @addToCart="addToCart"
@@ -35,19 +35,27 @@
         props: {},
         data() {
             return {
-                options: [
-                    {name: 'Option 1', value: 1},
-                    {name: 'Option 2', value: 2},
-                    {name: 'Option 3', value: 3}
+                categories: [
+                    {name: 'All', value: 'all'},
+                    {name: 'Computer & Technology', value: 'ct'},
+                    {name: 'Business', value: 'b'}
                 ],
-                selected: 'Select'
+                selected: 'All',
+                sortedProducts: []
             }
         },
         computed: {
             ...mapGetters([
                 'PRODUCTS',
                 'CART'
-            ])
+            ]),
+            filteredProducts() {
+                if (this.sortedProducts.length) {
+                    return this.sortedProducts;
+                } else {
+                    return this.PRODUCTS;
+                }
+            }
         },
         methods: {
             ...mapActions([
@@ -59,6 +67,16 @@
             },
             selectOption(option) {
                 this.selected = option.name;
+            },
+            sortByCategories(category) {
+                this.sortedProducts = [];
+                let self = this;
+                this.PRODUCTS.map(function (item) {
+                    if (item.category === category.name) {
+                        self.sortedProducts.push(item);
+                    }
+                });
+                this.selected = category.name;
             }
         },
         mounted() {
