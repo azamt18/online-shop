@@ -1,39 +1,78 @@
 <template>
-  <div class="v-header">
-    <img src="../../assets/logo.png" alt="">
-    <input
-        type="text"
-        class="search-field"
-    >
-  </div>
+    <div class="v-header">
+        <router-link :to="{name: 'main'}">
+            <img src="../../assets/logo.png" alt="">
+        </router-link>
+        <div class="search-field">
+            <input
+                    type="text"
+                    v-model="searchValue"
+            >
+            <button class="search_btn">
+                <i class="material-icons"
+                   @click="search(searchValue)"
+                >search</i>
+            </button>
+        </div>
+    </div>
 </template>
 
 <script>
-export default {
-  name: "v-header"
-}
+    import {mapActions, mapGetters} from 'vuex'
+
+    export default {
+        name: "v-header",
+        data() {
+            return {
+                searchValue: ''
+            }
+        },
+        computed: {
+          ...mapGetters([
+              'SEARCH_VALUE'
+          ])
+        },
+        methods: {
+            ...mapActions([
+                'GET_SEARCH_VALUE_TO_VUEX'
+            ]),
+            search(value) {
+                this.GET_SEARCH_VALUE_TO_VUEX(value);
+                this.$router.push('/catalog');
+            }
+        }
+    }
 </script>
 
 <style lang="scss">
-.v-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: $green-bg;
-  padding: 16px;
-  position: fixed;
-  width: 100%;
-  top: 0;
-  left: 0;
-  
-  img {
-    width: 50px;
-  }
+    .v-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: $green-bg;
+        padding: 16px;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
 
-  .search-field {
-    padding: 16px;
-    color: #000000;
-    background: #ffffff;
-  }
-}
+        img {
+            width: 50px;
+        }
+
+        .search-field {
+            padding: 16px;
+            position: relative;
+            right: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .search_btn {
+            margin-left: 16px;
+            background: transparent;
+            border: none;
+        }
+    }
 </style>

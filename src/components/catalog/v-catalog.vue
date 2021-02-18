@@ -73,7 +73,8 @@
         computed: {
             ...mapGetters([
                 'PRODUCTS',
-                'CART'
+                'CART',
+                'SEARCH_VALUE'
             ]),
             filteredProducts() {
                 if (this.sortedProducts.length) {
@@ -107,6 +108,9 @@
                     })
                 }
             },
+            sortProductsBySearchValue(value) {
+                this.watch.SEARCH_VALUE(value);
+            },
             setRangeSlider() {
                 if (this.minPrice > this.maxPrice) {
                     let temp = this.maxPrice;
@@ -114,6 +118,11 @@
                     this.minPrice = temp;
                 }
                 this.sortByCategories();
+            }
+        },
+        watch: {
+            SEARCH_VALUE(value) {
+                return value;
             }
         },
         mounted() {
@@ -143,7 +152,7 @@
 
         &__link_to_cart {
             position: absolute;
-            top: 10px;
+            top: 120px;
             right: 10px;
             padding: $padding*2;
             border: solid 1px black;
