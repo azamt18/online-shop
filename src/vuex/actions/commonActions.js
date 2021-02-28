@@ -1,6 +1,6 @@
 export default {
     GET_SEARCH_VALUE_TO_VUEX({commit}, value) {
-        commit('GET_SEARCH_VALUE_TO_VUEX', value);
+        commit('SET_SEARCH_VALUE_TO_VUEX', value);
     },
     ADD_TO_CART({commit}, product) {
         commit('SET_CART', product);

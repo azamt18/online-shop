@@ -11,22 +11,26 @@
                     @selectOption="sortByCategories"
             />
             <div class="range-slider">
-                <input
-                        max="1000"
-                        min="0"
-                        step="10"
-                        type="range"
-                        v-model.number="minPrice"
-                        @change="setRangeSlider"
-                >
-                <input
-                        max="1000"
-                        min="0"
-                        step="10"
-                        type="range"
-                        v-model.number="maxPrice"
-                        @change="setRangeSlider"
-                >
+                <label>
+                    <input
+                            max="10000"
+                            min="0"
+                            step="1000"
+                            type="range"
+                            v-model.number="minPrice"
+                            @change="setRangeSlider"
+                    >
+                </label>
+                <label>
+                    <input
+                            max="10000"
+                            min="0"
+                            step="1000"
+                            type="range"
+                            v-model.number="maxPrice"
+                            @change="setRangeSlider"
+                    >
+                </label>
             </div>
             <div class="range-values">
                 <p>Min: {{minPrice}}</p>
@@ -67,7 +71,7 @@
                 selected: 'All',
                 sortedProducts: [],
                 minPrice: 0,
-                maxPrice: 1000
+                maxPrice: 10000
             }
         },
         computed: {
@@ -102,14 +106,11 @@
                     return item.price >= vm.minPrice && item.price <= vm.maxPrice;
                 });
                 if (category) {
-                    this.sortedProducts = this.sortedProducts.filter(function (item) {
+                    this.sortedProducts = this.sortedProducts.filter(function (e) {
                         vm.selected = category.name;
-                        return item.category === category.name;
+                        return e.category === category.name;
                     })
                 }
-            },
-            sortProductsBySearchValue(value) {
-                this.watch.SEARCH_VALUE(value);
             },
             setRangeSlider() {
                 if (this.minPrice > this.maxPrice) {
@@ -118,11 +119,21 @@
                     this.minPrice = temp;
                 }
                 this.sortByCategories();
+            },
+            sortProductsBySearchValue(value) {
+                this.sortedProducts = [...this.PRODUCTS];
+                if (value) {
+                    this.sortedProducts = this.sortedProducts.filter(function (item) {
+                        return item.name.toLowerCase().includes(value.toLowerCase());
+                    })
+                } else {
+                    this.sortedProducts = this.PRODUCTS;
+                }
             }
         },
         watch: {
-            SEARCH_VALUE(value) {
-                return value;
+            SEARCH_VALUE() {
+                this.sortProductsBySearchValue(this.SEARCH_VALUE);
             }
         },
         mounted() {
@@ -131,6 +142,7 @@
                     if (response.data) {
                         console.log('Data arrived');
                         this.sortByCategories();
+                        this.sortProductsBySearchValue(this.SEARCH_VALUE)
                     }
                 })
         }
