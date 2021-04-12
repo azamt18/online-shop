@@ -40,7 +40,8 @@
       "parser": "babel-eslint"
     },
     "rules": {
-      "no-console": "on"
+      "no-console": "off",
+      "no-debugger": "off"
     }
   },
   "browserslist": [
