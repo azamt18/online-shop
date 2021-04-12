@@ -7,5 +7,11 @@ export default {
     },
     CART(state) {
         return state.cart;
+    },
+    BOOKS(state) {
+        return state.books;
+    },
+    USERS(state) {
+        return state.users;
     }
 }

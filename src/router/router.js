@@ -3,9 +3,14 @@ import Router from 'vue-router'
 
 Vue.use(Router);
 
-import vMainPage from '../components/main-page/v-main-page'
+import vMainPage from '../components/pages/v-main-page'
 import vCatalog from '../components/catalog/v-catalog'
 import vCart from '../components/cart/v-cart'
+
+import vBtnPage from '../components/button/v-btn-page'
+import vTextFieldPage from '../components/textfield/v-textfield-page'
+import vCarouselPage from '../components/carousel/carousel-page'
+import vTablePage from '../components/table/v-table-page'
 
 let router = new Router({
     routes: [
@@ -24,7 +29,32 @@ let router = new Router({
             name: 'cart',
             component: vCart,
             props: true
+        },
+        {
+            path: '/button',
+            name: 'button',
+            component: vBtnPage,
+            props: true
+        },
+        {
+            path: '/textfield',
+            name: 'textfield',
+            component: vTextFieldPage,
+            props: true
+        },
+        {
+            path: '/carousel',
+            name: 'carousel',
+            component: vCarouselPage,
+            props: true
+        },
+        {
+            path: '/table',
+            name: 'table',
+            component: vTablePage,
+            props: true
         }
+
     ]
 });
 

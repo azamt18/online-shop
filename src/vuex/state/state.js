@@ -1,5 +1,6 @@
 export default {
     searchValue: '',
     products: [],
-    cart: []
+    cart: [],
+    users: []
 }

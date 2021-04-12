@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import vHeader from '../components/layout/v-header'
+ import vHeader from '../components/layout/v-header'
 
 export default {
   name: 'v-main-wrapper',
